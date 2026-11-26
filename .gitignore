@@ -28,3 +28,5 @@ yarn-debug.log*
 
 .vscode/
 frontend/package.json.backup
+
+backend/database/diet_app.sql
