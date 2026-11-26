@@ -30,7 +30,6 @@ interface RecipeScreenProps {
 
 
 export default function RecipeScreen({ onBack, recipeData }: RecipeScreenProps) {
-  // Przykładowe dane zastępcze, jeśli nie przekazano obiektu z zewnątrz
   
  const currentRecipe = recipeData || {
   name: 'Nie wybrano przepisu',

@@ -10,10 +10,11 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import API_URL from './api';
+import BottomNavigation from './components/BottomNavigation';
 
 interface GeneratorScreenProps {
   userEmail?: string;
-  targetCalories?: number; // Otrzymana wartość z profilu / bazy
+  targetCalories?: number; 
   onPlanGenerated?: (planData: any) => void;
   onNavigateToPlan: () => void;
   onNavigateToSaved: () => void;
@@ -35,7 +36,7 @@ export default function GeneratorScreen({
   const [exclusions, setExclusions] = useState<string[]>(['Orzechy']);
   const [loading, setLoading] = useState<boolean>(false);
 
-  // Synchronizacja, gdy właściwość targetCalories zmieni się (np. po pobraniu danych z profilu)
+
   useEffect(() => {
   setCalories(targetCalories ?? 0);
 }, [targetCalories]);
@@ -176,25 +177,13 @@ export default function GeneratorScreen({
         </View>
       </ScrollView>
 
-      {/* Dolna nawigacja */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem} onPress={onNavigateToPlan}>
-          <Text style={styles.navIcon}>🏠</Text>
-          <Text style={styles.navText}>Plan</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.navItem, styles.navItemActive]}>
-          <Text style={[styles.navIcon, styles.navIconActive]}>✨</Text>
-          <Text style={[styles.navText, styles.navTextActive]}>Generator</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem} onPress={onNavigateToSaved}>
-          <Text style={styles.navIcon}>🔖</Text>
-          <Text style={styles.navText}>Zapisane</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem} onPress={onNavigateToProfile}>
-          <Text style={styles.navIcon}>👤</Text>
-          <Text style={styles.navText}>Profil</Text>
-        </TouchableOpacity>
-      </View>
+      <BottomNavigation
+  activeTab="Generator"
+  onNavigateToPlan={onNavigateToPlan}
+  onNavigateToGenerator={() => {}}
+  onNavigateToSaved={onNavigateToSaved}
+  onNavigateToProfile={onNavigateToProfile}
+/>
     </SafeAreaView>
   );
 }
@@ -257,11 +246,5 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   generateButtonText: { color: '#fff', fontSize: 16, fontWeight: 'bold' },
-  bottomNav: { position: 'absolute', bottom: 0, left: 0, right: 0, height: 70, backgroundColor: '#f4f6f4', borderTopWidth: 1, borderTopColor: '#e5e7eb', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', paddingBottom: 8 },
-  navItem: { alignItems: 'center', justifyContent: 'center', flex: 1, paddingVertical: 6 },
-  navItemActive: { backgroundColor: '#d8e8e1', borderRadius: 20, marginHorizontal: 8 },
-  navIcon: { fontSize: 20, marginBottom: 2, color: '#6b7280' },
-  navIconActive: { color: '#1b4d3e' },
-  navText: { fontSize: 12, color: '#6b7280', fontWeight: '500' },
-  navTextActive: { color: '#1b4d3e', fontWeight: 'bold' },
+  
 });

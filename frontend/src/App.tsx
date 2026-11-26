@@ -29,7 +29,7 @@ export default function App() {
   const [selectedRecipe, setSelectedRecipe] = useState<any>(null);
 
   // Pobieranie aktualnych danych profilu z backendu.
-  // Odświeża się również po przejściu z profilu do Generatora.
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       if (!userEmail) {

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
@@ -12,6 +11,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import API_URL from './api';
+import BottomNavigation from './components/BottomNavigation';
 
 interface SavedScreenProps {
   userId: number;
@@ -43,7 +43,7 @@ export default function SavedScreen({
 }: SavedScreenProps) {
   const [savedDiets, setSavedDiets] = useState<SavedDiet[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('Zapisane');
+  
 
   const fetchSavedDiets = async () => {
     if (!userId || userId <= 0) {
@@ -162,41 +162,13 @@ export default function SavedScreen({
         )}
       </ScrollView>
 
-      <View style={styles.bottomNav}>
-  <TouchableOpacity
-    style={styles.navItem}
-    onPress={onNavigateToCurrentPlan}
-  >
-          <Text style={styles.navIcon}>📋</Text>
-          <Text style={styles.navText}>Plan</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.navItem}
-          onPress={onNavigateToGenerator}
-        >
-          <Text style={styles.navIcon}>⚙️</Text>
-          <Text style={styles.navText}>Generator</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.navItem, styles.navItemActive]}
-          onPress={() => setActiveTab('Zapisane')}
-        >
-          <Text style={[styles.navIcon, styles.navIconActive]}>📁</Text>
-          <Text style={[styles.navText, styles.navTextActive]}>
-            Zapisane
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.navItem}
-          onPress={onNavigateToProfile}
-        >
-          <Text style={styles.navIcon}>👤</Text>
-          <Text style={styles.navText}>Profil</Text>
-        </TouchableOpacity>
-      </View>
+      <BottomNavigation
+  activeTab="Zapisane"
+  onNavigateToPlan={onNavigateToCurrentPlan}
+  onNavigateToGenerator={onNavigateToGenerator}
+  onNavigateToSaved={() => {}}
+  onNavigateToProfile={onNavigateToProfile}
+/>
     </SafeAreaView>
   );
 }
@@ -302,46 +274,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 12,
   },
-  bottomNav: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 70,
-    backgroundColor: '#f4f6f4',
-    borderTopWidth: 1,
-    borderTopColor: '#e5e7eb',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    paddingBottom: 8,
-  },
-  navItem: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingVertical: 6,
-  },
-  navItemActive: {
-    backgroundColor: '#d8e8e1',
-    borderRadius: 20,
-    marginHorizontal: 8,
-  },
-  navIcon: {
-    fontSize: 20,
-    marginBottom: 2,
-    color: '#6b7280',
-  },
-  navIconActive: {
-    color: '#1b4d3e',
-  },
-  navText: {
-    fontSize: 12,
-    color: '#6b7280',
-    fontWeight: '500',
-  },
-  navTextActive: {
-    color: '#1b4d3e',
-    fontWeight: 'bold',
-  },
+  
 });

@@ -1,4 +1,3 @@
-
 import { pool } from '../config/db.js';
 
 type GenerateOptions = {
@@ -79,9 +78,7 @@ function getMealType(index: number, mealsCount: number): string {
   ][index] ?? `Posiłek ${index + 1}`;
 }
 
-// =====================================================
 // OPTYMALIZACJA LOKALNA – HILL CLIMBING
-// =====================================================
 
 function optimizeSelection(
   initialSelection: Recipe[],
@@ -191,9 +188,8 @@ function optimizeSelection(
 
   return bestSelection;
 }
-// =====================================================
+
 // GENEROWANIE JADŁOSPISU
-// =====================================================
 
 export async function generateDailyMealPlan(
   userId: number,
@@ -642,9 +638,8 @@ export async function generateDailyMealPlan(
   }
 }
 
-// =====================================================
 // POBIERANIE DZISIEJSZEGO JADŁOSPISU
-// =====================================================
+
 
 export async function getDailyMealPlan(userId: number) {
   if (!Number.isInteger(userId) || userId <= 0) {
@@ -811,9 +806,7 @@ r.category,
   };
 }
 
-// =====================================================
 // POBIERANIE ARCHIWUM JADŁOSPISÓW
-// =====================================================
 
 export async function getSavedMealPlans(userId: number) {
   if (!Number.isInteger(userId) || userId <= 0) {
@@ -856,9 +849,8 @@ export async function getSavedMealPlans(userId: number) {
   }));
 }
 
-// =====================================================
 // POBIERANIE KONKRETNEGO JADŁOSPISU Z ARCHIWUM
-// =====================================================
+
 
 export async function getMealPlanById(
   userId: number,

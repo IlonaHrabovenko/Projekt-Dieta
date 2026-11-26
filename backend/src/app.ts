@@ -235,9 +235,6 @@ app.get('/api/diet/plans/:userId/:planId', async (req, res) => {
   }
 });
 
-
-// KOMPATYBILNOŚĆ ZE STARYM GENERATORS​​CREEN
-// POST /api/meal-plan/generate
 // Oczekuje email, mealsCount, exclusions.
 app.post('/api/meal-plan/generate', async (req, res) => {
   try {
@@ -281,7 +278,7 @@ app.post('/api/meal-plan/generate', async (req, res) => {
   }
 });
 
-// SERWER — tylko jedno uruchomienie
+
 const PORT = Number(process.env.PORT) || 5000;
 
 app.listen(PORT, '0.0.0.0', () => {

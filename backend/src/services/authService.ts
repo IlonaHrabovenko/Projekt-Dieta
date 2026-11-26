@@ -5,7 +5,7 @@ import dns from 'dns';
 import { promisify } from 'util';
 import { v4 as uuidv4 } from 'uuid';
 import { pool } from '../config/db.js';
-// import { transporter } from '../config/mailer.js'; // Wykomentowane, bo nie wysyłamy maili
+// import { transporter } from '../config/mailer.js'; 
 
 const resolveMx = promisify(dns.resolveMx);
 
@@ -47,7 +47,7 @@ export async function registerUser(input: RegisterInput) {
 
   const hashedPassword = await bcrypt.hash(input.password, 10);
   
-  // TYMCZASOWO: Pomijamy wysyłkę maila, konto od razu dostaje is_verified = TRUE
+  // tymczasowo pomijam wysyłkę maila
   const res = await pool.query(
     `INSERT INTO users (name, email, password_hash, is_verified)
      VALUES ($1, $2, $3, TRUE)
@@ -72,7 +72,7 @@ export async function loginUser(email: string, password: string) {
 
   const user = userRes.rows[0];
 
-  // TYMCZASOWO: Wyłączamy blokadę dla niezweryfikowanych kont
+  
   /*
   if (!user.is_verified) {
     throw new Error('Najpierw potwierdź swój adres e-mail (sprawdź skrzynkę pocztową).');

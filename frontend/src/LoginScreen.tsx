@@ -29,7 +29,7 @@ export default function LoginScreen({ onLoginSuccess, onNavigateToRegister }: Lo
 
     setLoading(true);
     try {
-      // Zapytanie POST do Twojego backendu Node.js
+      // Zapytanie POST do backendu Node.js
       const response = await fetch(`${API_URL}/api/auth/login`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
@@ -39,7 +39,7 @@ export default function LoginScreen({ onLoginSuccess, onNavigateToRegister }: Lo
       const result = await response.json();
 
       if (response.ok && result.success) {
-        // Zwrócony token JWT oraz dane użytkownika (w tym ID z bazy PostgreSQL)
+
         const { token, user } = result.data;
 
 if (!user || !user.id || !user.email || !token) {
